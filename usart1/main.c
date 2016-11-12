@@ -7,6 +7,8 @@
 #define USARTDIV 16000000/9600
 #define DLUGOSC_HASLA 3
 
+// ustawienia hasla 
+
 char haslo[DLUGOSC_HASLA] = "aaa";
 char wprowadzane_haslo[DLUGOSC_HASLA];
 const char zgodnosc[DLUGOSC_HASLA] = "bla";
