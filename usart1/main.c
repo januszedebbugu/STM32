@@ -4,7 +4,8 @@
 #define AFRH AFR[1]
 #define AFRH9_AF7 0x00000070
 #define AFRH10_AF7 0x00000700
-#define USARTDIV 16000000/9600
+#define BRR_MANTISSA 0x68 << 4  // (16 000 000 / (9600 * 16))
+#define BRR_FRACTIONAL 0x3 // 104,1666   0,1666*16 = 2.6256 -> 0x3
 #define DLUGOSC_HASLA 3
 
 // ustawienia hasla 
@@ -32,7 +33,7 @@ int main()
 	
 	GPIOA -> AFRH |= AFRH9_AF7 | AFRH10_AF7; // AF7 = 0111 (usart1)
 	
-	USART1 -> BRR = USARTDIV; // baudrate
+	USART1 -> BRR =  BRR_MANTISSA  | BRR_FRACTIONAL ; // baudrate
 	USART1 -> CR1 |= USART_CR1_UE | USART_CR1_RXNEIE | USART_CR1_TE | USART_CR1_RE; 
 	
 	NVIC_EnableIRQ(USART1_IRQn);
